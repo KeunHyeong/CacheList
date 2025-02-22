@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  ImageListTest
+//
+//  Created by 장근형 on 2/19/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+KAKAO_API_KEY = 8efcea27b784fa4efe2eaf8f16e50214
