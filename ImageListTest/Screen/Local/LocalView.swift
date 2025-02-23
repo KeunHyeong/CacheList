@@ -11,7 +11,6 @@ import Kingfisher
 struct LocalView: View {
     @StateObject var container: MVIContainer<LocalIntentProtocol, LocalModelStateProtocol>
     
-    
     private var intent: LocalIntentProtocol { container.intent }
     private var state: LocalModelStateProtocol { container.model }
     
@@ -36,7 +35,8 @@ struct LocalGridView: View {
     ]
     var body: some View {
         LazyVGrid(columns: columns) {
-            ForEach(items, id: \.self) { item in
+            ForEach(items.indices, id: \.self) { index in
+                let item = self.items[index]
                 LocalGridItemView(item: item)
             }
         }

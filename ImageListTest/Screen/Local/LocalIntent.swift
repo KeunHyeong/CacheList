@@ -9,11 +9,9 @@ import Foundation
 
 class LocalIntent {
     private var actionsModel: LocalModelActionProtocol
-    private var routerModel: LocalModelRouterProtocol
     
-    init(model: LocalModelActionProtocol & LocalModelRouterProtocol) {
+    init(model: LocalModelActionProtocol ) {
         actionsModel = model
-        routerModel = model
     }
 }
 

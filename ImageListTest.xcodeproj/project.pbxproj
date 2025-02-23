@@ -135,8 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				523A84B42D6564FA00A48284 /* Main */,
-				523A84B02D6564FA00A48284 /* Local */,
 				523A84B82D6564FA00A48284 /* Search */,
+				523A84B02D6564FA00A48284 /* Local */,
 				523A84B92D6564FA00A48284 /* MVIContainer.swift */,
 			);
 			path = Screen;

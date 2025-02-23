@@ -17,8 +17,6 @@ final class LocalModel: ObservableObject, LocalModelStateProtocol {
 
 extension LocalModel: LocalModelActionProtocol {}
 
-extension LocalModel: LocalModelRouterProtocol {}
-
 protocol LocalModelStateProtocol {
     var combinedItems: [SearchItem] { get set }
 }
@@ -26,5 +24,3 @@ protocol LocalModelStateProtocol {
 protocol LocalModelActionProtocol {
     func fetchLocalUsers()
 }
-
-protocol LocalModelRouterProtocol {}

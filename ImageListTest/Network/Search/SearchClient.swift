@@ -13,15 +13,10 @@ class SearchClient: APIClient {
     private static let searchCache = SearchResultCacheManager.shared
     
     static func fetchSearchResults(keyword: String, page: Int) async throws -> SearchResult {
-        // 캐시 키
         let cacheKey = keyword as NSString
-        
-        print("cacheKey: \(cacheKey)")
-        // 캐시가 존재하고 5분 이내이면 사용
         if let cachedItem = searchCache.object(forKey: cacheKey), Date().timeIntervalSince(cachedItem.timestamp) < 300 {
             // 기존 페이지 보다 작거나 같으면 캐싱된 데이타 반환
             if page <= cachedItem.page {
-                print("keyword: \(keyword) page \(page) cachedItem.page \(cachedItem.page)")
                 return cachedItem.result
             } else {
                 // 기존 페이지 보다 크다면 새 페이지 데이터를 받아 기존 결과에 추가
@@ -30,10 +25,8 @@ class SearchClient: APIClient {
                 
                 let newItems: [SearchItem] = newImages.documents.map { SearchItem.image($0) } + newVideos.documents.map { SearchItem.video($0) }
                 
-                // 기존 캐시 결과와 합치기
                 let combinedItems = cachedItem.result.items + newItems
                 
-                // meta 업데이트
                 let combinedIsEnd = newImages.meta.isEnd && newVideos.meta.isEnd
                 let updatedMeta = Meta(
                     totalCount: cachedItem.result.meta.totalCount,
@@ -49,7 +42,7 @@ class SearchClient: APIClient {
                 return updatedResult
             }
         } else {
-            // 캐시가 없거나 만료된 경우, 첫 페이지 데이터를 새로 가져옴.
+            // 캐시가 없거나 5분이 지난 경우, 첫 페이지 데이터를 새로 가져옴
             let images = try await fetchImages(keyword: keyword, page: 1)
             let videos = try await fetchVideos(keyword: keyword, page: 1)
             

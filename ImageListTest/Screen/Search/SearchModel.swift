@@ -33,35 +33,9 @@ extension SearchModel: SearchModelActionProtocol {
     }
     
     func setCombinedItems(_ items: [SearchItem]) {
-        print("uniqueItems count: \(items.count)")
-        withAnimation(.easeInOut) {
-            self.combinedItems = getSortedCombinedList(items)
-        }
+        print("total count: \(items.count)")
+        self.combinedItems = getSortedCombinedList(items)
     }
-    
-//    func appendItems( imageResponse: ImageResponse, videoResponse: VideoResponse ) {
-//        let imageItems = imageResponse.documents.map { SearchItem.image($0) }
-//        let videoItems = videoResponse.documents.map { SearchItem.video($0) }
-//        
-//        var tempItems = self.combinedItems
-//        tempItems.append(contentsOf: imageItems)
-//        tempItems.append(contentsOf: videoItems)
-//        
-//        var seenIDs = Set<String>()
-//        let uniqueItems = tempItems.filter { item in
-//            if seenIDs.contains(item.id) {
-//                return false
-//            } else {
-//                seenIDs.insert(item.id)
-//                return true
-//            }
-//        }
-//        
-//        print("uniqueItems count: \(uniqueItems.count)")
-//        withAnimation(.easeInOut) {
-//            self.combinedItems = getSortedCombinedList(uniqueItems)
-//        }
-//    }
     
     //날짜순으로 정렬
     private func getSortedCombinedList(_ combinedList: [SearchItem]) -> [SearchItem] {
@@ -90,8 +64,6 @@ extension SearchModel: SearchModelActionProtocol {
     }
 }
 
-extension SearchModel: SearchModelRouterProtocol {}
-
 protocol SearchModelStateProtocol {
     var metaIsEnd: Bool { get set }
     var combinedItems: [SearchItem] { get }
@@ -101,10 +73,7 @@ protocol SearchModelStateProtocol {
 
 protocol SearchModelActionProtocol {
     func updateMetaIsEnd(isEnd: Bool)
-//    func appendItems(imageResponse: ImageResponse, videoResponse: VideoResponse)
     func toggleList(for item: SearchItem)
     func setCombinedItems(_ items: [SearchItem])
     func cancel()
 }
-
-protocol SearchModelRouterProtocol {}

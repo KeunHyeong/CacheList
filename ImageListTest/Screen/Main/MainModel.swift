@@ -7,6 +7,17 @@
 
 import Foundation
 
+enum ViewType {
+    case search, local
+    
+    var toTitle: String {
+        switch self {
+        case .search: return "Search"
+        case .local: return "Local"
+        }
+    }
+}
+
 final class MainModel: ObservableObject, MainModelStateProtocol {
     @Published var selectedTab: ViewType = .search
     @Published var titles: [ViewType] = [.search, .local]
@@ -18,8 +29,6 @@ extension MainModel: MainModelActionProtocol {
     }
 }
 
-extension MainModel: MainModelRouterProtocol {}
-
 protocol MainModelStateProtocol {
     var selectedTab: ViewType { get set }
     var titles: [ViewType] { get }
@@ -28,5 +37,3 @@ protocol MainModelStateProtocol {
 protocol MainModelActionProtocol {
     func updateSelectedTab(_ selectedTab: ViewType)
 }
-
-protocol MainModelRouterProtocol {}

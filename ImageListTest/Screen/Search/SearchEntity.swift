@@ -104,13 +104,11 @@ enum SearchItem: Hashable, Equatable {
     }
 }
 
-// MARK: - 카카오 이미지 검색 응답
 struct ImageResponse: Codable, Equatable, Hashable {
     let meta: Meta
     let documents: [ImageDocument]
 }
 
-// MARK: - 검색 메타 정보
 struct Meta: Codable, Equatable, Hashable {
     let totalCount: Int
     let pageableCount: Int
@@ -123,7 +121,6 @@ struct Meta: Codable, Equatable, Hashable {
     }
 }
 
-// MARK: - 이미지 검색 결과
 struct ImageDocument: Codable, Equatable, Hashable {
     let collection: String
     let thumbnailURL: String
@@ -163,7 +160,6 @@ extension ImageDocument {
     }
 }
 
-// MARK: - 카카오 동영상 검색 응답
 struct VideoResponse: Codable, Equatable, Hashable {
     let meta: Meta
     let documents: [VideoDocument]

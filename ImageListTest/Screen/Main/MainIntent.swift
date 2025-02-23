@@ -8,24 +8,11 @@
 import Foundation
 import SwiftUI
 
-enum ViewType {
-    case search, local
-    
-    var toTitle: String {
-        switch self {
-        case .search: return "Search"
-        case .local: return "Local"
-        }
-    }
-}
-
 class MainIntent {
     private var actionsModel: MainModelActionProtocol
-    private var routerModel: MainModelRouterProtocol
     
-    init(model: MainModelActionProtocol & MainModelRouterProtocol) {
+    init(model: MainModelActionProtocol) {
         actionsModel = model
-        routerModel = model
     }
 }
 

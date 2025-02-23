@@ -8,7 +8,6 @@
 import Foundation
 
 class SearchResultCacheManager {
-    //키는 NSString 사용
     static let shared = NSCache<NSString, SearchResultCacheItem>()
     
     static func getPageIdx(_ keyword: String) -> Int {
@@ -34,7 +33,5 @@ class SearchResultCacheItem {
         self.result = result
         self.page = page
     }
-    
-
 }
 

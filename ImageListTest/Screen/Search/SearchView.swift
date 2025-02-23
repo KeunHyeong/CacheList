@@ -10,10 +10,10 @@ import Kingfisher
 import Combine
 
 struct SearchView: View {
+    @StateObject var container: MVIContainer<SearchIntentProtocol, SearchModelStateProtocol>
     @State private var newText: String = ""
     @State private var isLoading: Bool = false
     @State private var page: Int = 1
-    @StateObject var container: MVIContainer<SearchIntentProtocol, SearchModelStateProtocol>
     
     private var intent: SearchIntentProtocol { container.intent }
     private var state: SearchModelStateProtocol { container.model }
@@ -30,8 +30,9 @@ struct SearchView: View {
                         }
                 }
             }
-            .searchable(text: $container.model.searchText, prompt: "검색어를 입력해주세요")
+            .searchable(text: $container.model.searchText, prompt: "검색어를 입력해주세요.")
             .navigationTitle("")
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onChange(of: state.debouncedSearchText) { newText in
             guard let _ = newText.first?.description else {
@@ -58,7 +59,6 @@ struct SearchView: View {
     }
 }
 
-
 struct GridView: View {
     var isEnd: Bool
     var items:[SearchItem]
@@ -74,6 +74,8 @@ struct GridView: View {
             ForEach(items.indices, id: \.self) { index in
                 let item = self.items[index]
                 GridItemView(item: item, toggleLike: {toggleLike(item)})
+                    .transition(.opacity)
+                    .animation(.easeInOut(duration: 0.2), value: items)
             }
             
             if !items.isEmpty && !isEnd{
@@ -105,7 +107,9 @@ struct GridItemView: View {
                 .cacheMemoryOnly()
                 .fade(duration: 0.75)
                 .frame(width: item.width, height: item.height)
+            
             Spacer()
+            
             VStack(alignment:.trailing) {
                 Button(action: {
                     toggleLike()
@@ -131,7 +135,6 @@ struct GridItemView: View {
         }
     }
 }
-
 
 extension SearchView {
     static func build() -> some View {

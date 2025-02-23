@@ -5,13 +5,6 @@
 //  Created by 장근형 on 2/19/25.
 //
 
-//
-//  RealmManager.swift
-//  ImageListTest
-//
-//  Created by 장근형 on 2/19/25.
-//
-
 import Foundation
 import RealmSwift
 
