@@ -34,7 +34,10 @@ extension SearchModel: SearchModelActionProtocol {
     
     func setCombinedItems(_ items: [SearchItem]) {
         print("total count: \(items.count)")
-        self.combinedItems = getSortedCombinedList(items)
+        let sortedItems = getSortedCombinedList(items)
+        withAnimation(.easeInOut(duration: 0.3)) {
+            self.combinedItems.append(contentsOf: sortedItems)
+        }
     }
     
     //날짜순으로 정렬
